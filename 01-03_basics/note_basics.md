@@ -87,5 +87,53 @@ State files can be stored either locally or in a remote object store (S3), or in
 
 `$ terraform destroy` removes all resources associated with the Terraform configuration, typically used to clean up at the end of a project.
 
+## Remote Backend
+
+### Terraform Cloud
+
+Managed offering by HashiCorp. WebUI. Free for up to 5 users.
+
+Configure it:
+
+```json
+terraform {
+  backend "remote" {
+  	organization = "xxx"
+	}
+	
+	workspaces {
+    name = "xxxxx"
+  }
+}
+```
+
+
+
+### Self-managed AWS S3 + DynamoDB
+
+S3 stores state file, DDB table manages concurrency.
+
+#### Bootstrap it:
+
+1. Create a Terraform config and do a local init, apply to provision the S3 and DDB needed:
+   1. [remote-backend-s3/main.tf](./remote-backend-s3/main.tf)
+   2. terraform init, terraform plan, terraform apply
+
+2. Update the contigure to use the remote backend "s3"
+
+```json
+terraform {
+  backend = "s3" {
+  	bucket = "my-bucket"
+  	key = "my-tf/terraform.tfstate"
+  	region = "my-region"
+  	dynamodb_table = "my-ddb-table"
+  	encrypt = true
+	}
+}
+```
+
+- define the resources
+
 
 
