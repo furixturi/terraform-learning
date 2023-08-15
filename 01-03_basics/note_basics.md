@@ -133,7 +133,8 @@ terraform {
 }
 ```
 
-- define the resources
+3. Run `$ terraform init` again to update the backend config
+   local state file will be cleared and a new state file will be created in the specified S3 with specified key
 
 
 

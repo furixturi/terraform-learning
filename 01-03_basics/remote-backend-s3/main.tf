@@ -1,12 +1,12 @@
 terraform {
   ### Uncomment the following after first init-apply ###
-  # backend "s3" {
-  #     bucket = "terraform-devops-tf-state"
-  #     key = "basics/import-bootstrap/terraform.tfstate"
-  #     region = "ap-northeast-1"
-  #     dynamodb_table = "terraform-state-locking"
-  #     encrypt = true
-  # }
+  backend "s3" {
+    bucket         = "terraform-devops-tf-state"
+    key            = "basics/import-bootstrap/terraform.tfstate"
+    region         = "ap-northeast-1"
+    dynamodb_table = "terraform-state-locking"
+    encrypt        = true
+  }
   ### end of uncomment ###
 
   required_providers {
